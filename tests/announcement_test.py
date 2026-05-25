@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from PythonProjects.sprint_5.tests.conftest import driver
 from ..locators.locators import Locators
 from ..helpers import select_dropdown_option, click_radio_button
-import time
 
 
 def test_create_announcement_by_logged_in_user(logged_in_user):
@@ -22,8 +21,6 @@ def test_create_announcement_by_logged_in_user(logged_in_user):
     title.send_keys("Test Announcement")
     
     select_dropdown_option(driver, Locators.category_dropdown, "Книги")
-    print("AFTER CATEGORY CLICK")
-    print(driver.page_source)
     wait.until(EC.element_to_be_clickable(Locators.condition_used_radio))
     click_radio_button(driver, Locators.condition_used_radio)
     wait.until(
