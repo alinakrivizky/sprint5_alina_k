@@ -13,6 +13,8 @@ def driver():
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)
     driver.maximize_window()
+    driver.delete_all_cookies()
+    driver.refresh()
     driver.get('https://qa-desk.education-services.ru/')
     
     yield driver

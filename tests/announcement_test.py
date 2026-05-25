@@ -1,6 +1,10 @@
+
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from PythonProjects.sprint_5.tests.conftest import driver
 from ..locators.locators import Locators
 from ..helpers import select_dropdown_option, click_radio_button
 import time
@@ -18,12 +22,17 @@ def test_create_announcement_by_logged_in_user(logged_in_user):
     title.send_keys("Test Announcement")
     
     select_dropdown_option(driver, Locators.category_dropdown, "Книги")
-    #wait.until(EC.visibility_of_element_located(Locators.condition_used_radio))
-    time.sleep(1)
+    print("AFTER CATEGORY CLICK")
+    print(driver.page_source)
+    wait.until(EC.element_to_be_clickable(Locators.condition_used_radio))
     click_radio_button(driver, Locators.condition_used_radio)
-    #wait.until(EC.element_to_be_selected(Locators.condition_used_radio))
-    time.sleep(1)
-    
+    wait.until(
+    lambda d: "radioUnput_inputActive" in d.find_element(
+        By.XPATH,
+        "//label[text()='Б/У']/preceding-sibling::div"
+    ).get_attribute("class")
+)
+
     select_dropdown_option(driver, Locators.city_dropdown, "Екатеринбург")
     wait.until(EC.element_to_be_clickable(Locators.description_placeholder))
     
@@ -37,6 +46,7 @@ def test_create_announcement_by_logged_in_user(logged_in_user):
     wait.until(EC.element_to_be_clickable(Locators.submit_announcement_button)).click()
 
     assert "/create-lisiting" in driver.current_url
+   
 
 
 
