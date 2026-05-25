@@ -16,7 +16,7 @@ class Locators:
  title_placeholder =(By.NAME, 'name')
  category_dropdown = (By.CSS_SELECTOR, "input[value='Авто']")
  condition_new_radio = (By.XPATH, "//input[@name='condition'][@value='Новый']")
- condition_used_radio = (By.XPATH, "(//div[@class='radioUnput_inputRegular__FbVbr'])[1]")
+ condition_used_radio = (By.XPATH, "//input[@name='condition'][@value='Б/У']")
  city_dropdown = (By.XPATH, "//input[@name='city']")
  choose_city_ekaterinburg = (By.XPATH, "(//button[@type='button'])[16]")
  description_placeholder = (By.TAG_NAME, "textarea")
