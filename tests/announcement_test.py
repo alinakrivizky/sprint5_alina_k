@@ -3,10 +3,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-from PythonProjects.sprint_5.tests.conftest import driver
-from ..locators.locators import Locators
-from ..helpers import select_dropdown_option, click_radio_button
+from sprint_5.locators.locators import Locators
+from sprint_5.helpers import select_dropdown_option, click_radio_button
 
 
 def test_create_announcement_by_logged_in_user(logged_in_user):

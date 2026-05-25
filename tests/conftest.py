@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-from ..locators.locators import Locators
+from sprint_5.locators.locators import Locators
 
 @pytest.fixture(scope='function')
 def driver():
