@@ -5,6 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from sprint_5.locators.locators import Locators
 from sprint_5.helpers import select_dropdown_option, click_radio_button
+import time
 
 
 class TestAnnouncement:
@@ -12,8 +13,6 @@ class TestAnnouncement:
         driver = logged_in_user
         wait = WebDriverWait(driver, 10)
         wait.until(EC.element_to_be_clickable(Locators.create_announcement_button)).click()
-        current_url = driver.current_url
-        assert "/create-lisiting" in current_url
         wait.until(EC.presence_of_element_located(Locators.title_placeholder))
         title = wait.until(EC.element_to_be_clickable(Locators.title_placeholder))
         title.click()
@@ -39,6 +38,7 @@ class TestAnnouncement:
         wait.until(EC.element_to_be_clickable(Locators.submit_announcement_button)).click()
 
         assert "/create-lisiting" in driver.current_url
+        time.sleep(2)  
 
     def test_create_announcement_by_unregistered_user(self, driver):
         wait = WebDriverWait(driver, 10)

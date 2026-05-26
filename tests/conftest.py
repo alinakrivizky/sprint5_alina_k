@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from sprint_5.locators.locators import Locators
+from sprint_5.data import BASE_URL, LOGIN_PATH, VALID_USER_EMAIL, VALID_USER_PASSWORD
 
 @pytest.fixture(scope='function')
 def driver():
@@ -15,7 +16,7 @@ def driver():
     driver.maximize_window()
     driver.delete_all_cookies()
     driver.refresh()
-    driver.get('https://qa-desk.education-services.ru/')
+    driver.get(BASE_URL)
     
     yield driver
     
@@ -26,15 +27,15 @@ def driver():
 def logged_in_user(driver):
     wait = WebDriverWait(driver, 10)
     wait.until(EC.element_to_be_clickable(Locators.reglog_button)).click()
-    wait.until(EC.url_contains("/login"))
+    wait.until(EC.url_contains(LOGIN_PATH))
     
     email = wait.until(EC.element_to_be_clickable(Locators.email_placeholder))
     email.click()
-    email.send_keys("al@gmail.com")
+    email.send_keys(VALID_USER_EMAIL)
     
     password = wait.until(EC.element_to_be_clickable(Locators.password_placeholder))
     password.click()
-    password.send_keys("aaaaaddddd12R")
+    password.send_keys(VALID_USER_PASSWORD)
     
     wait.until(EC.element_to_be_clickable(Locators.enter_login_button)).click()
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".profileText.name")))

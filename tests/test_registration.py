@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from sprint_5.locators.locators import Locators
+from sprint_5.data import INVALID_EMAIL, NEW_USER_EMAIL_FORMAT, VALID_USER_EMAIL, VALID_USER_PASSWORD
 
 import time
 
@@ -16,16 +17,16 @@ class TestRegistration:
         wait.until(EC.presence_of_element_located(Locators.email_placeholder))
         email = wait.until(EC.element_to_be_clickable(Locators.email_placeholder))
         email.click()
-        random_email = f"user{str(int(time.time()))}@example.com"
+        random_email = NEW_USER_EMAIL_FORMAT.format(timestamp=int(time.time()))
         email.send_keys(random_email)
 
         password = wait.until(EC.element_to_be_clickable(Locators.password_placeholder))
         password.click()
-        password.send_keys("aaaaaddddd12R")
+        password.send_keys(VALID_USER_PASSWORD)
 
         confirm = wait.until(EC.element_to_be_clickable(Locators.password_submit_placeholder))
         confirm.click()
-        confirm.send_keys("aaaaaddddd12R")
+        confirm.send_keys(VALID_USER_PASSWORD)
 
         wait.until(EC.element_to_be_clickable(Locators.create_account_button)).click()
         profile_name = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".profileText.name")))
@@ -42,15 +43,15 @@ class TestRegistration:
         wait.until(EC.presence_of_element_located(Locators.email_placeholder))
         email = wait.until(EC.element_to_be_clickable(Locators.email_placeholder))
         email.click()
-        email.send_keys("invalid-email")
+        email.send_keys(INVALID_EMAIL)
 
         password = wait.until(EC.element_to_be_clickable(Locators.password_placeholder))
         password.click()
-        password.send_keys("aaaaaddddd12R")
+        password.send_keys(VALID_USER_PASSWORD)
 
         confirm = wait.until(EC.element_to_be_clickable(Locators.password_submit_placeholder))
         confirm.click()
-        confirm.send_keys("aaaaaddddd12R")
+        confirm.send_keys(VALID_USER_PASSWORD)
         
         wait.until(EC.element_to_be_clickable(Locators.create_account_button)).click()
         error_message = wait.until(EC.visibility_of_element_located(Locators.error_message))
@@ -65,13 +66,13 @@ class TestRegistration:
         wait.until(EC.presence_of_element_located(Locators.email_placeholder))
         email = wait.until(EC.element_to_be_clickable(Locators.email_placeholder))
         email.click()
-        email.send_keys("al@gmail.com")
+        email.send_keys(VALID_USER_EMAIL)
         password = wait.until(EC.element_to_be_clickable(Locators.password_placeholder))
         password.click()
-        password.send_keys("aaaaaddddd12R")
+        password.send_keys(VALID_USER_PASSWORD)
         confirm = wait.until(EC.element_to_be_clickable(Locators.password_submit_placeholder))
         confirm.click()
-        confirm.send_keys("aaaaaddddd12R")
+        confirm.send_keys(VALID_USER_PASSWORD)
         wait.until(EC.element_to_be_clickable(Locators.create_account_button)).click()
         error_message = wait.until(EC.visibility_of_element_located(Locators.error_message))
         assert error_message.text == "Ошибка", f"Expected 'Ошибка', but got '{error_message.text}'"

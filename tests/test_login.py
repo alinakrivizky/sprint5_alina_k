@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from sprint_5.locators.locators import Locators
+from sprint_5.data import VALID_USER_EMAIL, VALID_USER_PASSWORD
 
 
 class TestLogin:
@@ -12,10 +13,10 @@ class TestLogin:
 
         email = wait.until(EC.element_to_be_clickable(Locators.email_placeholder))
         email.click()
-        email.send_keys("al@gmail.com")
+        email.send_keys(VALID_USER_EMAIL)
         password = wait.until(EC.element_to_be_clickable(Locators.password_placeholder))
         password.click()
-        password.send_keys("aaaaaddddd12R")
+        password.send_keys(VALID_USER_PASSWORD)
         wait.until(EC.element_to_be_clickable(Locators.enter_login_button)).click()
         profile_name = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".profileText.name")))
         profile_icon = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".svgSmall")))
