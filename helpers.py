@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from sprint_5.locators.locators import Locators
 
 
 def select_dropdown_option(driver, dropdown_locator, option_text, wait_time=10):
@@ -13,8 +14,9 @@ def select_dropdown_option(driver, dropdown_locator, option_text, wait_time=10):
     dropdown = wait.until(EC.element_to_be_clickable(dropdown_locator))
     driver.execute_script("arguments[0].scrollIntoView(true);", dropdown)
     dropdown.click()
+    selector = Locators.dropdown_option_buttons[1]
     script = f"""
-    const buttons = Array.from(document.querySelectorAll('.dropDownMenu_btn__o8ARs'));
+    const buttons = Array.from(document.querySelectorAll('{selector}'));
     const option = buttons.find(btn => btn.textContent.includes('{option_text}'));
     if (option) {{
         option.click();

@@ -18,8 +18,8 @@ class TestLogin:
         password.click()
         password.send_keys(VALID_USER_PASSWORD)
         wait.until(EC.element_to_be_clickable(Locators.enter_login_button)).click()
-        profile_name = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".profileText.name")))
-        profile_icon = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".svgSmall")))
+        profile_name = wait.until(EC.visibility_of_element_located(Locators.profile_name))
+        profile_icon = wait.until(EC.visibility_of_element_located(Locators.profile_icon))
         assert profile_name.is_displayed(), "Profile name should be visible after login"
         assert profile_icon.is_displayed(), "Profile icon should be visible after login"
 
